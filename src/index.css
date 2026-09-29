@@ -1,0 +1,484 @@
+@import "tailwindcss";
+
+/* =========================================================
+   Layer 0 · Tailwind v4 @theme
+   ========================================================= */
+@theme {
+  /* 蓝调主题色 */
+  --color-accent: #2563eb;
+  --color-accent-soft: rgba(37, 99, 235, 0.08);
+  --color-accent-border: rgba(37, 99, 235, 0.25);
+
+  /* 功能色 */
+  --color-success: #16a34a;
+  --color-warning: #f59e0b;
+  --color-danger: #dc2626;
+  --color-info: #2563eb;
+
+  /* 圆角 */
+  --radius-ds-xs: 6px;
+  --radius-ds: 10px;
+  --radius-ds-lg: 14px;
+  --radius-ds-xl: 18px;
+
+  /* 字体 */
+  --font-sans: 'PingFang SC', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, system-ui, sans-serif;
+}
+
+/* =========================================================
+   Layer 1 · 颜色基础色
+   ========================================================= */
+:root {
+  /* 主色 — 蓝色调 */
+  --accent: #1677ff;
+  --accent-hover: #3c91ff;
+  --accent-active: #0e5fd8;
+  --accent-soft: rgba(22, 119, 255, 0.08);
+  --accent-border: rgba(22, 119, 255, 0.25);
+  --accent-glow: rgba(22, 119, 255, 0.25);
+  --accent-gradient: linear-gradient(135deg, #1677ff 0%, #5b8cff 50%, #8b6bff 100%);
+  --accent-gradient-soft: linear-gradient(135deg, rgba(22, 119, 255, 0.08) 0%, rgba(139, 107, 255, 0.08) 100%);
+
+  /* 功能色 */
+  --success: #16a34a;
+  --warning: #f59e0b;
+  --danger: #dc2626;
+
+  /* 文字 5 级 */
+  --text-1: #0f172a;
+  --text-2: #475569;
+  --text-3: #94a3b8;
+  --text-4: #cbd5e1;
+
+  /* 边框 */
+  --border: rgba(15, 23, 42, 0.06);
+  --border-light: rgba(15, 23, 42, 0.04);
+  --border-strong: rgba(15, 23, 42, 0.10);
+  --border-focus: rgba(22, 119, 255, 0.35);
+
+  /* 背景 */
+  --bg-base: #fafbfd;
+  --bg-hover: rgba(22, 119, 255, 0.04);
+  --bg-active: rgba(22, 119, 255, 0.08);
+  --bg-surface: rgba(255, 255, 255, 0.72);
+
+  /* =========================================================
+     Layer 3 · 液态玻璃属性（核心）
+     ========================================================= */
+  /* 玻璃底档 — 功能模块 50%~60% 白 + backdrop-blur */
+  --glass-card: rgba(255, 255, 255, 0.55);
+  --glass-card-hover: rgba(255, 255, 255, 0.68);
+  --glass-modal: rgba(255, 255, 255, 0.82);
+  --glass-navbar: rgba(255, 255, 255, 0.50);
+
+  /* 模糊 + 饱和度 */
+  --blur-card: 16px;
+  --blur-modal: 22px;
+  --blur-navbar: 18px;
+  --saturate-card: 1.45;
+  --saturate-modal: 1.60;
+
+  /* 顶部高光（液态质感关键） */
+  --glass-hl: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 40%);
+
+  /* 底部微妙反光 */
+  --glass-reflect: linear-gradient(0deg, rgba(22, 119, 255, 0.025) 0%, transparent 50%);
+
+  /* =========================================================
+     Layer 4 · 阴影层级
+     ========================================================= */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 6px 20px -4px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 20px 48px -8px rgba(15, 23, 42, 0.12), 0 4px 8px rgba(15, 23, 42, 0.06);
+  --shadow-float: 0 12px 40px rgba(37, 99, 235, 0.10), 0 4px 8px rgba(15, 23, 42, 0.06);
+  --shadow-glow: 0 8px 24px -4px rgba(22, 119, 255, 0.35), 0 2px 8px rgba(22, 119, 255, 0.15);
+
+  /* 圆角 */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+
+  /* =========================================================
+     Layer 5 · 动效时长 & 缓动
+     ========================================================= */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 360ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #d9e2ec transparent;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-1);
+  min-height: 100vh;
+  /* 浅蓝渐变基底 */
+  background-color: #f2f6ff;
+  background-image:
+    /* 主渐变：极淡蓝 → 极淡蓝紫 */
+    linear-gradient(135deg, #f0f5ff 0%, #f2f7ff 40%, #f6f4ff 80%, #f8f5ff 100%),
+    /* 亮斑 1：左上，压暗 */
+    radial-gradient(ellipse 50% 40% at 8% 12%, rgba(37, 99, 235, 0.12), transparent 60%),
+    /* 亮斑 2：右下紫蓝，压暗 */
+    radial-gradient(ellipse 42% 38% at 92% 92%, rgba(124, 99, 255, 0.10), transparent 60%),
+    /* 亮斑 3：中心柔光，压暗 */
+    radial-gradient(ellipse 55% 42% at 50% 48%, rgba(59, 130, 246, 0.06), transparent 70%),
+    /* 微网格 */
+    linear-gradient(rgba(37, 99, 235, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.018) 1px, transparent 1px);
+  background-size:
+    auto, auto, auto, auto,
+    32px 32px, 32px 32px;
+  background-attachment: fixed;
+}
+
+#root { min-height: 100vh; }
+
+/* =========================================================
+   滚动条
+   ========================================================= */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d9e2ec; border-radius: 3px; transition: background 0.2s; }
+::-webkit-scrollbar-thumb:hover { background: #bcc7d4; }
+
+/* 进度条 */
+.ds-scroll-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 100;
+  transform-origin: left center;
+  transform: scaleX(0);
+  background: var(--accent-gradient);
+  background-size: 200% 200%;
+  box-shadow: 0 0 8px rgba(22, 119, 255, 0.35);
+  animation: gradient-x 6s ease infinite;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.ds-scroll-hidden::-webkit-scrollbar { display: none; }
+.ds-scroll-hidden { scrollbar-width: none; -ms-overflow-style: none; }
+
+.ds-scroll-area { overflow-y: auto; scroll-behavior: smooth; }
+.ds-scroll-area::-webkit-scrollbar { width: 8px; }
+.ds-scroll-area::-webkit-scrollbar-track { background: transparent; margin: 4px 0; }
+.ds-scroll-area::-webkit-scrollbar-thumb {
+  background: #d9e2ec; border-radius: 4px; border: 2px solid transparent; background-clip: content-box;
+  transition: background 0.2s;
+}
+.ds-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: #bcc7d4; background-clip: content-box; border: 2px solid transparent;
+}
+.ds-scroll-area { scrollbar-width: thin; scrollbar-color: #d9e2ec transparent; }
+
+/* =========================================================
+   动效系统
+   ========================================================= */
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scale-in { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+@keyframes slide-in-right { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); } 50% { box-shadow: 0 0 0 6px transparent; } }
+@keyframes toast-in { from { opacity: 0; transform: translateX(40px) scale(0.95); } to { opacity: 1; transform: translateX(0) scale(1); } }
+@keyframes toast-out { from { opacity: 1; transform: translateX(0) scale(1); } to { opacity: 0; transform: translateX(40px) scale(0.95); } }
+@keyframes gradient-x { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+.animate-fade-up  { animation: fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fade-in  { animation: fade-in 0.35s ease both; }
+.animate-scale-in { animation: scale-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.delay-75  { animation-delay: 75ms; }
+.delay-100 { animation-delay: 100ms; }
+.delay-150 { animation-delay: 150ms; }
+.delay-200 { animation-delay: 200ms; }
+
+/* =========================================================
+   GlassCard · 液态玻璃卡片（核心）
+   — 无 ::before 状态竖条（用户要求移除）
+   — 用顶部高光渐变 + hover 上浮 + 边框发光
+   ========================================================= */
+.ds-card {
+  position: relative;
+  background: var(--glass-card);
+  backdrop-filter: blur(var(--blur-card)) saturate(var(--saturate-card));
+  -webkit-backdrop-filter: blur(var(--blur-card)) saturate(var(--saturate-card));
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-xs);
+  transition:
+    transform var(--duration-slow) var(--ease-out-expo),
+    box-shadow var(--duration-slow) var(--ease-out-expo),
+    border-color var(--duration-base) ease,
+    background var(--duration-base) ease;
+  overflow: hidden;
+}
+.ds-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: var(--glass-hl);
+  opacity: 0.6;
+  z-index: 0;
+}
+.ds-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: var(--glass-reflect);
+  opacity: 1;
+  z-index: 0;
+}
+.ds-card > * { position: relative; z-index: 1; }
+
+.ds-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-float);
+  background: var(--glass-card-hover);
+}
+.ds-card:hover::before { opacity: 0.85; }
+
+/* 液态发光边缘 — hover 时显现 */
+.ds-card[data-hover-glow]::after {
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background: var(--accent-gradient);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.ds-card:hover[data-hover-glow]::after { opacity: 0.5; }
+
+/* =========================================================
+   GlassSurface · 厚玻璃（模态框用）
+   ========================================================= */
+.ds-glass-surface {
+  background: var(--glass-modal);
+  backdrop-filter: blur(var(--blur-modal)) saturate(var(--saturate-modal));
+  -webkit-backdrop-filter: blur(var(--blur-modal)) saturate(var(--saturate-modal));
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* =========================================================
+   按钮
+   ========================================================= */
+.ds-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 20px;
+  background: var(--accent-gradient);
+  background-size: 200% 200%;
+  color: #fff;
+  border: none;
+  border-radius: var(--r-sm);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(22, 119, 255, 0.25), 0 2px 6px -2px rgba(22, 119, 255, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  animation: gradient-x 6s ease infinite;
+}
+.ds-btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px -2px rgba(22, 119, 255, 0.45), 0 2px 4px rgba(22, 119, 255, 0.15);
+  filter: brightness(1.05);
+}
+.ds-btn-primary:active:not(:disabled) { transform: translateY(0); }
+.ds-btn-primary:disabled { background: #cbd5e1; box-shadow: none; animation: none; cursor: not-allowed; }
+
+.ds-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 20px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.ds-btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   输入框
+   ========================================================= */
+.ds-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  font-size: 14px;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(6px);
+  color: var(--text-1);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+textarea.ds-input { height: auto; padding: 10px 12px; line-height: 1.65; resize: vertical; }
+.ds-input::placeholder { color: var(--text-4); }
+.ds-input:focus {
+  border-color: var(--accent);
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* =========================================================
+   标签 / 徽章 / 胶囊
+   ========================================================= */
+.ds-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  backdrop-filter: blur(6px);
+}
+.ds-tag-muted {
+  background: rgba(148, 163, 184, 0.15);
+  color: var(--text-2);
+}
+
+.ds-segment {
+  height: 28px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  color: var(--text-3);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.ds-segment:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.ds-segment-active {
+  background: var(--accent-gradient-soft);
+  border-color: rgba(22, 119, 255, 0.3);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* =========================================================
+   日历 tooltip
+   ========================================================= */
+.calendar-day {
+  position: relative;
+  cursor: default;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+.calendar-day:hover { filter: brightness(0.93); transform: scale(1.05); z-index: 2; }
+.calendar-day .day-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0f172a;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s;
+  pointer-events: none;
+  z-index: 20;
+  box-shadow: var(--shadow-lg);
+}
+.calendar-day:hover .day-tooltip { opacity: 1; visibility: visible; }
+.calendar-day .day-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: #0f172a;
+}
+
+/* =========================================================
+   模态框 overlay + modal
+   ========================================================= */
+.ds-overlay {
+  animation: fade-in 0.2s ease;
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(4px);
+}
+.ds-modal { animation: scale-in 0.22s cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* 渐变文字 */
+.ds-gradient-text {
+  background: var(--accent-gradient);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-x 6s ease infinite;
+}
+
+/* 计时器光晕 */
+.ds-focus-glow { position: relative; }
+.ds-focus-glow::before {
+  content: '';
+  position: absolute;
+  inset: -24px;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+  z-index: -1;
+  animation: pulse-glow 3s ease infinite;
+}
+
+/* 进度条渐变动画（JS 动态宽时用） */
+.ds-progress-bar-fill {
+  transition: width 500ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease;
+}
