@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import KnowledgePage from './pages/Knowledge';
 import StudyTrackerPage from './pages/StudyTracker';
 import JobBoardPage from './pages/JobBoard';
+import CareerAssistantPage from './pages/CareerAssistant';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <Route index element={<StudyTrackerPage />} />
             <Route path="knowledge" element={<KnowledgePage />} />
             <Route path="jobs" element={<JobBoardPage />} />
+            <Route path="career" element={<CareerAssistantPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>

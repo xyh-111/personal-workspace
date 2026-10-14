@@ -76,6 +76,12 @@ function Layout() {
                 >
                   求职看板
                 </Link>
+                <Link
+                  to="/career"
+                  className="px-3 py-1.5 text-[var(--text-2)] hover:text-[var(--accent)] hover:bg-[var(--accent-soft)] rounded-md transition-all no-underline hover:-translate-y-[1px]"
+                >
+                  求职助手
+                </Link>
               </>
             ) : (
               <Link

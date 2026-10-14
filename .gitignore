@@ -31,3 +31,15 @@ dist-ssr
 *.lnk
 *.exe
 
+# Backend
+backend/.env
+backend/.env.local
+backend/data.db
+backend/data.db-journal
+backend/uploads/
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+*.pyc
+.venv/
+

@@ -87,3 +87,62 @@ export function getStatusPalette(key: string) {
 
 // 状态配置（已废弃，保留引用）
 export const JOB_STATUS_CONFIG: Record<string, { label: string; color: string; bgColor: string }> = {};
+
+// ========== 求职助手（后端） ==========
+export interface ProjectExperience {
+  id: number;
+  title: string;
+  role: string;
+  start_date: string | null;   // ISO date
+  end_date: string | null;
+  description: string;
+  tech_stack: string;
+  highlights: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ProjectExperienceCreate {
+  title: string;
+  role: string;
+  start_date?: string | null;
+  end_date?: string | null;
+  description: string;
+  tech_stack?: string;
+  highlights?: string;
+}
+
+export interface JDRecord {
+  id: number;
+  company: string;
+  position: string;
+  source_text: string;
+  raw_type: 'text' | 'image';
+  raw_file_path: string | null;
+  uploaded_at: string;
+}
+
+export interface GreetingVersion {
+  style: string;
+  content: string;
+}
+
+export interface GreetingResponse {
+  results: GreetingVersion[];
+  model_used: string;
+  raw_used_jd: string;
+}
+
+export interface RewriteResult {
+  experience_id: number;
+  original_title: string;
+  original: string;
+  rewritten: string;
+  match_score: number;
+}
+
+export interface RewriteResponse {
+  results: RewriteResult[];
+  model_used: string;
+  raw_used_jd: string;
+}
